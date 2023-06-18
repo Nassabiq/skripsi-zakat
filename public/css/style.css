@@ -1,0 +1,167 @@
+.card-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.error-messages {
+	font-size: 10pt;
+	padding-top: 2px;
+}
+
+.card {
+	width: 90%;
+}
+
+.bg-body-tertiary {
+	--bs-bg-opacity: 1;
+	background-color: #0d4729 !important;
+	color: white !important;
+}
+
+.nav-link {
+	color: white !important;
+}
+
+.nav-link-active {
+	color: greenyellow !important;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.nav-link:hover {
+	color: greenyellow !important;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.btn-hijau {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+}
+
+.bg-abu {
+	background-color: #dfdfdf;
+	border-radius: 10px;
+}
+
+.green {
+	color: #0d4729 !important;
+	font-weight: bold;
+}
+
+.btn-regis {
+	background-color: #ddaf25 !important;
+	color: white;
+	border: none;
+	font-weight: bold;
+}
+
+.btn-login {
+	background-color: white !important;
+	color: #0d4729;
+	border: none;
+	font-weight: bold;
+}
+
+.btn-daftar {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+	width: 90px;
+}
+
+.btn-unduh {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+}
+
+.btn-next {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+}
+
+.btn-prev {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+}
+
+#search-button {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+}
+
+.btn-add-user {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+}
+
+.btn-salin {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+}
+
+.btn-bayar {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+}
+
+.info-box {
+	background-color: #d3d3d3;
+}
+
+.icon-info {
+	height: 1.5rem;
+}
+
+.icon-time {
+	height: 1.5rem;
+}
+
+.bank-logo {
+	height: 3rem;
+}
+
+.form-inline {
+	display: flex;
+	align-items: center;
+}
+
+.form-inline label {
+	margin-right: 5px;
+}
+
+.form-inline select {
+	margin-right: 5px;
+}
+
+.input-group {
+	display: flex;
+	align-items: center;
+}
+
+.input-group input {
+	margin-right: 5px;
+}
+
+.btn-signin {
+	background-color: #0d4729;
+	border: 1px solid #0d4729;
+}
+
+#login-regis {
+	background-color: #0d4729;
+}
+
+.register-text {
+	color: #ffffff; /* Warna putih untuk teks "Already have an account?" */
+}
+
+.register-text a {
+	color: blue; /* Warna biru untuk link "Sign in" */
+}
+
+.login-text {
+	color: black; /* Warna hitam untuk teks "Don't have an account?" */
+}
