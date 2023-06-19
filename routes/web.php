@@ -4,7 +4,6 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BeritaMasjidController;
 use App\Http\Controllers\GaleriController;
-use App\Http\Livewire\Admin\Agenda;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +32,8 @@ Route::get('/profile', function () {
 // Admin Page
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/agenda', Agenda::class);
+        Route::get('/agenda', [AgendaController::class, 'admin']);
+        Route::post('/agenda', [AgendaController::class, 'addAgenda']);
         Route::post('/agenda/storeImage', [AgendaController::class, 'storeImage'])->name('storeAgenda');
 
         Route::get('/gallery', [GaleriController::class, 'index']);

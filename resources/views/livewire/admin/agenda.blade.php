@@ -4,15 +4,13 @@
 <div class="container-fluid">
     <!-- Page Heading -->
 
-    {{ $count }}
-    <button wire:click="counter">click</button>
+
     <div class="d-flex justify-content-between">
         <h1 class="h3 mb-4 text-gray-800">Agenda</h1>
         <div>
             <button class="btn btn-primary fs-6" type="button" data-bs-toggle="modal" data-bs-target="#modalAddAgenda">
                 Tambah Agenda
             </button>
-            {{ $count }}
         </div>
     </div>
     <div class="col-12">

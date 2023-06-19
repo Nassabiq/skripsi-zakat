@@ -10,6 +10,10 @@ class AgendaController extends Controller
     {
         return view('agenda');
     }
+    public function admin()
+    {
+        return view('admin.agenda');
+    }
 
     public function storeImage(Request $request)
     {
@@ -24,6 +28,18 @@ class AgendaController extends Controller
             $url = asset('media/' . $fileName);
             return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
         }
+    }
+
+
+    public function addAgenda(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_agenda' => 'required',
+            'tgl_agenda' => 'required|date',
+            'deskripsi_agenda' => 'required',
+            'foto_agenda' => 'required|image|size:4098',
+        ]);
+        dd($request);
     }
     //
 }

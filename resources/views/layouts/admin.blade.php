@@ -11,7 +11,7 @@
                 <!-- Main Content -->
                 <div id="content" wire:ignore>
                     @include('livewire.components.admin.navbar')
-                    {{-- @yield('content') --}}
+                    @yield('content')
 
                     @isset($slot)
                         {{ $slot }}
@@ -22,7 +22,7 @@
             </div>
             <!-- End of Content Wrapper -->
         </div>
-        {{-- <!-- End of Page Wrapper -->
+        <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
@@ -55,6 +55,6 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
     </div>
 @endsection
