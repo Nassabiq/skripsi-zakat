@@ -1,7 +1,11 @@
 @extends('layouts.base')
 @section('body')
-    @include('components.navbar')
-    <div id="app">
+    @include('livewire.components.navbar')
+    <div>
         @yield('content')
+
+        @isset($slot)
+            {{ $slot }}
+        @endisset
     </div>
 @endsection

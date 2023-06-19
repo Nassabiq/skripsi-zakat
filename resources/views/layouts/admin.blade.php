@@ -1,23 +1,28 @@
 @extends('layouts.base')
+
 @section('body')
-    <div id="app">
+    <div>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            @include('components.admin.sidebar')
+            @include('livewire.components.admin.sidebar')
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
-                <div id="content">
-                    @include('components.admin.navbar')
-                    @yield('content')
+                <div id="content" wire:ignore>
+                    @include('livewire.components.admin.navbar')
+                    {{-- @yield('content') --}}
+
+                    @isset($slot)
+                        {{ $slot }}
+                    @endisset
                 </div>
                 <!-- End of Main Content -->
-                @include('components.admin.footer')
+                @include('livewire.components.admin.footer')
             </div>
             <!-- End of Content Wrapper -->
         </div>
-        <!-- End of Page Wrapper -->
+        {{-- <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
@@ -50,7 +55,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div> --}}
     </div>
 @endsection

@@ -10,10 +10,6 @@ class AgendaController extends Controller
     {
         return view('agenda');
     }
-    public function admin()
-    {
-        return view('admin.agenda');
-    }
 
     public function storeImage(Request $request)
     {

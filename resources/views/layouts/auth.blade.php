@@ -1,6 +1,10 @@
 @extends('layouts.base')
 @section('body')
-    <div id="app">
+    <div>
         @yield('content')
+
+        @isset($slot)
+            {{ $slot }}
+        @endisset
     </div>
 @endsection
