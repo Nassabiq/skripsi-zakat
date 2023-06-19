@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
 use Illuminate\Http\Request;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class AgendaController extends Controller
 {
@@ -37,8 +39,18 @@ class AgendaController extends Controller
             'nama_agenda' => 'required',
             'tgl_agenda' => 'required|date',
             'deskripsi_agenda' => 'required',
-            'foto_agenda' => 'required|image|size:4098',
+            'foto_agenda' => 'required|image|mimes:jpeg,png,jpg,gif,svg|size:4098',
         ]);
+
+        $id = IdGenerator::generate(['table' => 'agenda', 'length' => 12, 'prefix' => date('agenda-')]);
+
+        if ($request->hasFile('foto_agenda')) {
+            # code...
+            $imageName = "image-agenda-" . $id . $request->foto_agenda->extension();
+            $request->foto_agenda->move(public_path('agenda'), $imageName);
+        }
+
+        Agenda::create([]);
         dd($request);
     }
     //
