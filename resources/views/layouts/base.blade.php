@@ -34,8 +34,8 @@
     </style>
 
     {{-- Plug-in --}}
-    @livewireStyles
-    @livewireScripts
+    {{-- @livewireStyles
+    @livewireScripts --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
 
@@ -65,6 +65,16 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'Notification',
+                    text: text
+                })
+            </script>
+        @endif
+        @if (session()->has('error'))
+            <script>
+                const text = "{{ session('error') }}"
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Alert',
                     text: text
                 })
             </script>

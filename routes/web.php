@@ -32,9 +32,31 @@ Route::get('/profile', function () {
 // Admin Page
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
+
+        // GET DATA AGENDA
         Route::get('/agenda', [AgendaController::class, 'admin']);
-        Route::post('/agenda', [AgendaController::class, 'addAgenda']);
-        Route::post('/agenda/storeImage', [AgendaController::class, 'storeImage'])->name('storeAgenda');
+        // INSERT DATA AGENDA
+        Route::post('/agenda', [AgendaController::class, 'insert']);
+
+        Route::patch(
+            '/agenda/{id_agenda}',
+            [AgendaController::class, 'update']
+        )->name('updateAgenda'); // UPDATE DATA AGENDA
+
+        Route::patch(
+            '/agenda/validasi/{id_agenda}',
+            [AgendaController::class, 'validasi']
+        )->name('validasiAgenda'); // UPDATE STATUS DATA AGENDA
+
+        Route::delete(
+            '/agenda/{id_agenda}',
+            [AgendaController::class, 'delete']
+        )->name('deleteAgenda'); // DELETE DATA AGENDA
+
+        Route::post(
+            '/agenda/storeImage',
+            [AgendaController::class, 'storeImage']
+        )->name('storeAgenda');
 
         Route::get('/gallery', [GaleriController::class, 'index']);
         Route::get('/news', [BeritaMasjidController::class, 'admin']);
