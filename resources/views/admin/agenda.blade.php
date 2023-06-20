@@ -14,28 +14,6 @@
             </div>
         </div>
         <div class="col-12">
-            {{-- <div class="row justify-content-between">
-                <div class="input-group my-4 col">
-                    <input type="text" class="form-control col-3" placeholder="Search..." aria-label="Search"
-                        aria-describedby="search-button" required="" />
-                    <button class="btn btn-primary" type="button" id="search-button">
-                        Search
-                    </button>
-                </div>
-                <div class="form-inline col-auto">
-                    <label for="per-page"> Per-Page</label>
-                    <select id="per-page" class="form-control">
-                        <option value="5">5</option>
-                        <option value="5">10</option>
-                        <option value="5">15</option>
-                    </select>
-                    <label for="status-validasi"> Status</label>
-                    <select id="status-validasi" class="form-control col-auto">
-                        <option value="belum-validasi">Belum Validasi</option>
-                        <option value="sudah-validasi">Sudah Validasi</option>
-                    </select>
-                </div>
-            </div> --}}
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -181,7 +159,7 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label">Deskripsi Agenda</label>
-                                                            <textarea id="editorAgenda" name="deskripsi_agenda">
+                                                            <textarea id="editorAgenda2" name="deskripsi_agenda">
                                                                 {{ old('deskripsi_agenda', $item->deskripsi_agenda) }}
                                                             </textarea>
                                                             @error('deskripsi_agenda')
@@ -293,10 +271,20 @@
                 </div>
             </div>
         </div>
+        {{-- End Modal Add Agenda --}}
 
         <script>
             ClassicEditor
                 .create(document.querySelector('#editorAgenda'), {
+                    ckfinder: {
+                        uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            ClassicEditor
+                .create(document.querySelector('#editorAgenda2'), {
                     ckfinder: {
                         uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
                     }

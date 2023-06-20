@@ -58,7 +58,25 @@ Route::middleware('auth')->group(function () {
             [AgendaController::class, 'storeImage']
         )->name('storeAgenda');
 
+        // GET DATA GALERI
         Route::get('/gallery', [GaleriController::class, 'index']);
+
+        Route::post(
+            '/gallery',
+            [GaleriController::class, 'insert']
+        )->name('addGallery'); // INSERT DATA GALERI
+
+        Route::patch(
+            '/gallery/{id}',
+            [GaleriController::class, 'update']
+        )->name('updateGallery'); // UPDATE DATA GALERI
+
+        Route::delete(
+            '/gallery/{id}',
+            [GaleriController::class, 'delete']
+        )->name('deleteGallery'); // DELETE DATA GALERI
+
+
         Route::get('/news', [BeritaMasjidController::class, 'admin']);
     });
 });
