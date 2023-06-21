@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('tgl_berita');
             $table->longText('deskripsi_berita');
             $table->longText('foto_berita');
+            $table->boolean('is_published');
 
             $table->timestamps();
         });

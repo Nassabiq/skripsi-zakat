@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Agenda - Dashboard Masjid Miftahul Jannah')
+@section('title', 'Gallery - Dashboard Masjid Miftahul Jannah')
 
 @section('content')
     <div class="container-fluid">
@@ -17,10 +17,10 @@
                 <thead>
                     <tr>
                         <th scope="col">-</th>
-                        <th scope="col">Id Agenda</th>
-                        <th scope="col">Nama Agenda</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Deskripsi</th>
+                        <th scope="col">Id Galeri</th>
+                        <th scope="col">Nama Galeri</th>
+                        <th scope="col">Tanggal</th>
+                        {{-- <th scope="col">Deskripsi</th> --}}
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -33,13 +33,15 @@
                             </th>
                             <td scope="row">{{ $item->id_galeri }}</td>
                             <td>{{ $item->nama_galeri }}</td>
-                            <td>{{ $item->tgl_galeri }}</td>
-                            <td>{!! $item->deskripsi_galeri !!}</td>
+                            <td>
+                                {{ \Carbon\Carbon::parse($item->tgl_galeri)->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}
+                            </td>
+                            {{-- <td>{!! Str::substr($item->deskripsi_galeri, 0, 300) !!} ...</td> --}}
                             <td>
                                 <div class="d-flex">
                                     <button class="btn btn-success mr-2" type="button" data-bs-toggle="modal"
                                         data-bs-target="#modalDetailGaleri-{{ $item->id_galeri }}">
-                                        <i class="bi bi-chevron-double-right"></i>
+                                        <i class="bi bi-eye"></i>
                                     </button>
                                     <button class="btn btn-primary mr-2" type="button" data-bs-toggle="modal"
                                         data-bs-target="#modalEditGaleri-{{ $item->id_galeri }}">
@@ -56,7 +58,7 @@
                         {{-- Modal Detail Galeri --}}
                         <div class="modal fade" id="modalDetailGaleri-{{ $item->id_galeri }}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog modal-dialog-centered modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Data Galeri </h1>
@@ -64,7 +66,39 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Apakah anda ingin menghapus data galeri ini?
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div id="carouselExample" class="carousel slide">
+                                                    <div class="carousel-inner">
+                                                        @foreach (json_decode($item->foto_galeri) as $key => $image)
+                                                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }} ">
+                                                                <img src="{{ asset('img/galeri/' . $item->id_galeri . '/' . $image) }}"
+                                                                    class="d-block w-100" alt="...">
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <button class="carousel-control-prev" type="button"
+                                                        data-bs-target="#carouselExample" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button"
+                                                        data-bs-target="#carouselExample" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <h2>{{ $item->nama_galeri }}</h2>
+                                                <div class="d-flex">
+                                                    <i class="bi bi-calendar3 mr-2"></i>
+                                                    <p>{{ \Carbon\Carbon::parse($item->tgl_galeri)->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}
+                                                    </p>
+                                                </div>
+                                                <p>{!! $item->deskripsi_galeri !!}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

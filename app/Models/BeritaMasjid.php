@@ -15,5 +15,5 @@ class BeritaMasjid extends Model
 
     protected $table = 'berita_masjid';
 
-    protected $fillable = ['id_berita_masjid', 'nama_berita', 'tgl_berita', 'deskripsi_berita', 'foto_berita'];
+    protected $fillable = ['id_berita_masjid', 'nama_berita', 'tgl_berita', 'deskripsi_berita', 'foto_berita', 'is_published'];
 }

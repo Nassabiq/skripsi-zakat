@@ -33,6 +33,8 @@ Route::get('/profile', function () {
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
 
+        /** ----------------- AGENDA MODULE --------------------- **/
+
         // GET DATA AGENDA
         Route::get('/agenda', [AgendaController::class, 'admin']);
         // INSERT DATA AGENDA
@@ -58,6 +60,8 @@ Route::middleware('auth')->group(function () {
             [AgendaController::class, 'storeImage']
         )->name('storeAgenda');
 
+        /** ----------------- GALERI MODULE --------------------- **/
+
         // GET DATA GALERI
         Route::get('/gallery', [GaleriController::class, 'index']);
 
@@ -76,8 +80,25 @@ Route::middleware('auth')->group(function () {
             [GaleriController::class, 'delete']
         )->name('deleteGallery'); // DELETE DATA GALERI
 
+        /** ------------ BERITA MASJID MODULE ---------------- **/
 
+        // GET DATA BERITA MASJID
         Route::get('/news', [BeritaMasjidController::class, 'admin']);
+
+        Route::post(
+            '/news',
+            [BeritaMasjidController::class, 'insert']
+        )->name('addBerita'); // INSERT DATA BERITA
+
+        Route::patch(
+            '/news/{id}',
+            [BeritaMasjidController::class, 'update']
+        )->name('updateBerita'); // UPDATE DATA BERITA
+
+        Route::delete(
+            '/news/{id}',
+            [BeritaMasjidController::class, 'delete']
+        )->name('deleteBerita'); // DELETE DATA BERITA
     });
 });
 
