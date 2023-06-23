@@ -28,6 +28,18 @@ Route::get('/contact', function () {
 Route::get('/profile', function () {
     return view('profile');
 });
+Route::get('/zis', function () {
+    return view('zis');
+});
+Route::get('/zakat-fitrah', function () {
+    return view('zakat-fitrah');
+});
+Route::get('/zakat-mal', function () {
+    return view('zakat-mal');
+});
+Route::get('/infaq-sodaqoh', function () {
+    return view('infaq-sodaqoh');
+});
 
 // Admin Page
 Route::middleware('auth')->group(function () {

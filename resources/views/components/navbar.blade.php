@@ -12,8 +12,9 @@
                 <a class="nav-link ms-md-5 {{ request()->is('news') ? 'nav-link-active' : '' }}" href="news">News</a>
                 <a class="nav-link ms-md-5 {{ request()->is('agenda') ? 'nav-link-active' : '' }}"
                     href="agenda">Agenda</a>
-                <a class="nav-link ms-md-5" href="zis.html">ZIS</a>
-                <a class="nav-link ms-md-5 {{ request()->is('contact') ? 'nav-link-active' : '' }}"
+                <a class="nav-link ms-md-5 {{ request()->is('agenda') ? 'nav-link-active' : '' }}"
+                    href="zis">ZIS</a>
+                <a class="nav-link ms-md-5 {{ request()->is('zis') ? 'nav-link-active' : '' }}"
                     href="contact">Contact</a>
                 <span class="nav-link" style="margin-left: 100px; border-bottom: none"></span>
                 @auth

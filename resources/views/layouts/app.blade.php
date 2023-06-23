@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('body')
-    @include('livewire.components.navbar')
+    @include('components.navbar')
     <div>
         @yield('content')
 

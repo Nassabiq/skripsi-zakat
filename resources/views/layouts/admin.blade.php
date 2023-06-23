@@ -4,13 +4,13 @@
     <div>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            @include('livewire.components.admin.sidebar')
+            @include('components.admin.sidebar')
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content" wire:ignore>
-                    @include('livewire.components.admin.navbar')
+                    @include('components.admin.navbar')
                     @yield('content')
 
                     @isset($slot)
@@ -18,7 +18,7 @@
                     @endisset
                 </div>
                 <!-- End of Main Content -->
-                @include('livewire.components.admin.footer')
+                @include('components.admin.footer')
             </div>
             <!-- End of Content Wrapper -->
         </div>
