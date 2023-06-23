@@ -26,6 +26,8 @@
                 <a class="collapse-item" href="agenda">Agenda</a>
                 <a class="collapse-item" href="gallery">Gallery</a>
                 <a class="collapse-item" href="news">News</a>
+                <a class="collapse-item" href="news">Laporan ZIS</a>
+                <a class="collapse-item" href="news">News</a>
             </div>
         </div>
     </li>
