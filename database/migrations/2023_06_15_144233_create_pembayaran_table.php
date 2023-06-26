@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->string('id_pembayaran')->unique();
+            $table->primary('id_pembayaran');
 
             $table->dateTime('tgl_transaksi');
             $table->string('no_invoice');

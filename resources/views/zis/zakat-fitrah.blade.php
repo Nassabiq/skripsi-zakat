@@ -30,10 +30,10 @@
                     @csrf
                     <input type="hidden" name="zis" value="zakat-fitrah">
 
-                    <small>Nominal*</small>
+                    <small>Jumlah Jiwa*</small>
                     <div class="input-group mb-3 flex-nowrap">
                         <input type="text" class="form-control" placeholder="" aria-label="Nominal"
-                            aria-describedby="addon-wrapping" required="" value="10000" min="10000"
+                            aria-describedby="addon-wrapping" required="" value="1" min="1"
                             name="jumlah_zakat" />
                         @error('jumlah_zakat')
                             <div class="text-danger error-messages">{{ $message }}</div>
@@ -76,7 +76,7 @@
                         </ul>
                     </div> --}}
                     <div>
-                        <small>Nama Muzakki <sup>*optional</sup> </small>
+                        <small>Nama Muzakki</small>
                         <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="" aria-label="Nama"
                                 aria-describedby="addon-wrapping" placeholder="Nama Muzakki" name="nama_muzakki" />

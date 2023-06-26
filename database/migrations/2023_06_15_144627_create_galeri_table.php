@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('galeri', function (Blueprint $table) {
             $table->string('id_galeri')->unique();
+            $table->primary('id_galeri');
 
             $table->string('nama_galeri');
             $table->dateTime('tgl_galeri');

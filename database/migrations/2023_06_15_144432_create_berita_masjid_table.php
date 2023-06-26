@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('berita_masjid', function (Blueprint $table) {
             $table->string('id_berita_masjid')->unique();
+            $table->primary('id_berita_masjid');
 
             $table->string('nama_berita');
             $table->dateTime('tgl_berita');

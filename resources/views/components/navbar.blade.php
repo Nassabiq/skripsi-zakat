@@ -6,16 +6,18 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav text-center justify-content-center col-12">
-                <a class="nav-link ms-md-5 {{ request()->is('/') ? 'nav-link-active' : '' }}" href="/">Home</a>
+                <a class="nav-link ms-md-5 {{ request()->is('/') ? 'nav-link-active' : '' }}"
+                    href="{{ route('home') }}">Home</a>
                 <a class="nav-link ms-md-5 {{ request()->is('profile') ? 'nav-link-active' : '' }}"
-                    href="profile">Profil</a>
-                <a class="nav-link ms-md-5 {{ request()->is('news') ? 'nav-link-active' : '' }}" href="news">News</a>
+                    href="{{ route('profile') }}">Profil</a>
+                <a class="nav-link ms-md-5 {{ request()->is('news') ? 'nav-link-active' : '' }}"
+                    href="{{ route('news') }}">News</a>
                 <a class="nav-link ms-md-5 {{ request()->is('agenda') ? 'nav-link-active' : '' }}"
-                    href="agenda">Agenda</a>
-                <a class="nav-link ms-md-5 {{ request()->is('agenda') ? 'nav-link-active' : '' }}"
-                    href="zis">ZIS</a>
-                <a class="nav-link ms-md-5 {{ request()->is('zis') ? 'nav-link-active' : '' }}"
-                    href="contact">Contact</a>
+                    href="{{ route('agenda') }}">Agenda</a>
+                <a class="nav-link ms-md-5 {{ request()->is('zis/*') ? 'nav-link-active' : '' }}"
+                    href="{{ route('zis') }}">ZIS</a>
+                <a class="nav-link ms-md-5 {{ request()->is('contact') ? 'nav-link-active' : '' }}"
+                    href="{{ route('contact') }}">Contact</a>
                 <span class="nav-link" style="margin-left: 100px; border-bottom: none"></span>
                 @auth
                     <li class="nav-item dropdown">
@@ -31,7 +33,7 @@
                                 </li>
                             @endhasanyrole
                             <li>
-                                <a class="dropdown-item" href="dashboard.html">Status ZIS</a>
+                                <a class="dropdown-item" href="{{ route('data_muzakki') }}">Status ZIS</a>
                             </li>
                             <li>
                                 <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

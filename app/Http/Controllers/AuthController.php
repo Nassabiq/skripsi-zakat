@@ -7,6 +7,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -72,5 +74,64 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login')->with('success', 'You have logged out!');
+    }
+
+    public function kelolaUsers()
+    {
+        $data = User::with('roles')->get();
+        $roles = Role::get();
+        return view('admin.users', [
+            'data' => $data,
+            'roles' => $roles
+        ]);
+    }
+
+    public function insert(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_user' => 'required',
+            'email' => 'required|email',
+            'role' => 'required',
+        ]);
+
+        if ($validator->fails()) return back()->withErrors($validator)->with('error', "Oops!! Something Went Wrong")->withInput($request->all());
+
+        $user = User::create([
+            'name' => $request->nama_user,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+
+        $user->assignRole($request->role);
+
+        return redirect()->back()->with('success', 'User Berhasil Ditambahkan!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'role' => 'required',
+        ]);
+
+        if ($validator->fails()) return back()->withErrors($validator)->with('error', "Oops!! Something Went Wrong")->withInput($request->all());
+
+        $user = User::findOrFail($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->assignRole($request->role);
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'User Berhasil Diupdate!');
+    }
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->back()->with('success', 'User Berhasil Dihapus!');
     }
 }

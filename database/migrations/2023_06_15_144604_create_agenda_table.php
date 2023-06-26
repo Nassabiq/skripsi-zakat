@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('agenda', function (Blueprint $table) {
             $table->string('id_agenda')->unique();
+            $table->primary('id_agenda');
 
             $table->string('nama_agenda');
             $table->dateTime('tgl_agenda');

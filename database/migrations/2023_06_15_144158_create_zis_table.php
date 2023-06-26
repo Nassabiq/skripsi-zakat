@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('zis', function (Blueprint $table) {
             $table->string('id_zis')->unique();
+            $table->primary('id_zis');
+
+            $table->string('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('no_pembayaran');
             $table->string('nama_muzakki')->nullable();
@@ -22,8 +25,9 @@ return new class extends Migration
             $table->integer('nominal_pembayaran');
 
             $table->integer('status_pembayaran');
+            $table->longText('bukti_pembayaran')->nullable();
 
-            $table->string('validasi_data')->nullable();
+            $table->integer('validasi_data')->nullable();
 
             $table->timestamps();
         });

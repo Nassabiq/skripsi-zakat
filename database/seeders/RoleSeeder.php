@@ -13,7 +13,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['Ketua', 'Bendahara', 'Admin', 'Takmir', 'Muzakki'];
+        $roles = ['ketua', 'bendahara', 'admin', 'takmir', 'muzakki'];
 
         foreach ($roles as $role) {
             # code...

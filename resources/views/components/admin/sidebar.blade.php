@@ -1,8 +1,8 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-text mx-3">Ta'mir</div>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
+        <div class="sidebar-brand-text mx-3">{{ auth()->user()->name }}</div>
     </a>
     <!-- Divider -->
     <hr class="sidebar-divider my-0" />
@@ -23,10 +23,16 @@
         </a>
         <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="agenda">Agenda</a>
-                <a class="collapse-item" href="gallery">Gallery</a>
-                <a class="collapse-item" href="news">News</a>
-                <a class="collapse-item" href="news">Laporan ZIS</a>
+                <a class="collapse-item {{ request()->routeIs('admin_agenda') ? 'bg-gray-300 rounded' : '' }}"
+                    href="agenda">Agenda</a>
+                <a class="collapse-item {{ request()->routeIs('admin_galeri') ? 'bg-gray-300 rounded' : '' }}"
+                    href="gallery">Gallery</a>
+                <a class="collapse-item {{ request()->routeIs('admin_news') ? 'bg-gray-300 rounded' : '' }}"
+                    href="news">News</a>
+                <a class="collapse-item {{ request()->routeIs('laporan_zis') ? 'bg-gray-300 rounded' : '' }}"
+                    href="{{ route('laporan_zis') }}">Laporan ZIS</a>
+                <a class="collapse-item {{ request()->routeIs('kelola_user') ? 'bg-gray-300 rounded' : '' }}"
+                    href="{{ route('kelola_user') }}">Kelola User</a>
             </div>
         </div>
     </li>
