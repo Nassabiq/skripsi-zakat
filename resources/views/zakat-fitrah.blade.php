@@ -8,14 +8,15 @@
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-6 col-md-4">
-                            <img src="img/sack-rice.jpg" class="img-fluid rounded-2" style="height: 10rem" alt="zakat fitrah" />
+                            <img src="{{ asset('img/sack-rice.jpg') }} " class="img-fluid rounded-2" style="height: 10rem"
+                                alt="zakat fitrah" />
                         </div>
                         <div class="col-6 col-md-8">
                             <div class="card-body">
                                 <h6 class="card-title">You will donate to the program</h6>
                                 <p class="card-text my-3">Zakat Fitrah</p>
                                 <p class="card-text my-3">
-                                    <a href="kalkulator.html">click here</a> to calculate charity.
+                                    <a href="kalkulator">click here</a> to calculate charity.
                                 </p>
                             </div>
                         </div>
@@ -25,23 +26,33 @@
         </div>
         <div class="row d-flex justify-content-center container m-5">
             <div class="col-7 bg-abu p-4">
-                <form action="">
-                    <small>Jumlah Jiwa*</small>
-                    <select class="form-select my-4" aria-label="Default select example" id="jumlah-jiwa" required=""
-                        onchange="showInputFields()">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <div id="inputFieldsContainer">
-                        <!-- Input fields will be dynamically added here -->
+                <form action="{{ route('addZis') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="zis" value="zakat-fitrah">
+
+                    <small>Nominal*</small>
+                    <div class="input-group mb-3 flex-nowrap">
+                        <input type="text" class="form-control" placeholder="" aria-label="Nominal"
+                            aria-describedby="addon-wrapping" required="" value="10000" min="10000"
+                            name="jumlah_zakat" />
+                        @error('jumlah_zakat')
+                            <div class="text-danger error-messages">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle mb-3 col-12" type="button" id="dropdownPayment"
-                            style="background-color: #ffffff; color: black" data-bs-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
+                    <select class="form-select mb-3" aria-label=".form-select-lg example" name="selected_bank">
+                        <option value="" selected>Choose a payment method</option>
+                        <option value="Mandiri">Mandiri</option>
+                        <option value="BCA">BCA</option>
+                        <option value="BRI">BRI</option>
+                        <option value="BSI">BSI</option>
+                    </select>
+                    @error('selected_bank')
+                        <div class="text-danger error-messages">{{ $message }}</div>
+                    @enderror
+                    {{-- <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle mb-3 col-12 mt-3" type="button"
+                            id="dropdownPayment" style="background-color: #ffffff; color: black" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             Choose a payment method
                         </button>
                         <ul class="dropdown-menu">
@@ -63,17 +74,18 @@
                                 <span class="option-text">BSI</span>
                             </li>
                         </ul>
+                    </div> --}}
+                    <div>
+                        <small>Nama Muzakki <sup>*optional</sup> </small>
+                        <div class="input-group flex-nowrap">
+                            <input type="text" class="form-control" placeholder="" aria-label="Nama"
+                                aria-describedby="addon-wrapping" placeholder="Nama Muzakki" name="nama_muzakki" />
+                            @error('nama_muzakki')
+                                <div class="text-danger error-messages">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="input-group flex-nowrap mt-3">
-                        <input type="text" pattern="[0-9]" class="form-control" placeholder="" aria-label="Nama"
-                            aria-describedby="addon-wrapping" required="" />
-                    </div>
-                    <div class="input-group mb-3 my-4">
-                        <input class="form-check-input mt-1" type="checkbox" value=""
-                            aria-label="Checkbox for following text input" />
-                        <div class="ms-3">Hide my name</div>
-                    </div>
-                    <button type="submit" class="btn btn-secondary btn-hijau w-100 mt-4">
+                    <button type="submit" class="btn btn-success btn-hijau w-100 mt-4">
                         Next
                     </button>
                 </form>

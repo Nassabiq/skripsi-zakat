@@ -36,6 +36,7 @@ class AuthController extends Controller
                 'password' => bcrypt($request->password)
             ]
         );
+        $user->assignRole("Muzakki");
 
         auth()->login($user);
 
@@ -51,6 +52,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
+
+            if (Auth::user()->role('Muzakki')) {
+                return redirect()->intended('/')->with('success', 'You have logged in!');
+            }
             return redirect()->intended('admin/gallery')->with('success', 'You have logged in!');
         }
 

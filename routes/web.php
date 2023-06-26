@@ -4,6 +4,7 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BeritaMasjidController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\ZisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,17 +29,19 @@ Route::get('/contact', function () {
 Route::get('/profile', function () {
     return view('profile');
 });
-Route::get('/zis', function () {
-    return view('zis');
-});
-Route::get('/zakat-fitrah', function () {
-    return view('zakat-fitrah');
-});
-Route::get('/zakat-mal', function () {
-    return view('zakat-mal');
-});
-Route::get('/infaq-sodaqoh', function () {
-    return view('infaq-sodaqoh');
+
+// ZAKAT INFAQ DAN SODAQOH
+Route::get('/zis', [ZisController::class, 'index']);
+Route::post('/zis', [ZisController::class, 'insert'])->name('addZis');
+
+Route::get('/zakat-fitrah', [ZisController::class, 'zakatFitrah']);
+Route::get('/zakat-mal', [ZisController::class, 'zakatMal']);
+Route::get('/infaq-sodaqoh', [ZisController::class, 'infaqSodaqoh']);
+
+Route::get('/invoice/{id}', [ZisController::class, 'invoice'])->name('invoice');
+
+Route::get('/kalkulator', function () {
+    return view('kalkulator');
 });
 
 // Admin Page

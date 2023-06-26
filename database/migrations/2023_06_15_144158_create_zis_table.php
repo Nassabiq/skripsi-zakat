@@ -15,8 +15,15 @@ return new class extends Migration
             $table->string('id_zis')->unique();
 
             $table->string('no_pembayaran');
-            $table->integer('status');
-            $table->string('validasi_data');
+            $table->string('nama_muzakki')->nullable();
+
+            $table->string('tipe_zis');
+            $table->string('jenis_bank');
+            $table->integer('nominal_pembayaran');
+
+            $table->integer('status_pembayaran');
+
+            $table->string('validasi_data')->nullable();
 
             $table->timestamps();
         });
