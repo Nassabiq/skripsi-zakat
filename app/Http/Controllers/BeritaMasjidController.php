@@ -13,7 +13,10 @@ class BeritaMasjidController extends Controller
 {
     public function index()
     {
-        return view('news');
+        $data = BeritaMasjid::where('is_published', 1)->get();
+        return view('news', [
+            'data' => $data
+        ]);
     }
     public function admin()
     {
@@ -53,7 +56,7 @@ class BeritaMasjidController extends Controller
             'is_published' => 0,
         ]);
 
-        return redirect()->to('admin/news')->with('success', 'Data Successfully Added!');
+        return redirect()->back()->with('success', 'Data Successfully Added!');
     }
     public function update(Request $request, $id)
     {
@@ -88,8 +91,19 @@ class BeritaMasjidController extends Controller
         $berita->foto_berita = json_encode($files);
         $berita->save();
 
-        return redirect()->to('admin/news')->with('success', 'Data Successfully Deleted!');
+        return redirect()->back()->with('success', 'Data Successfully Updated!');
     }
+
+    public function publish($id)
+    {
+        $berita = BeritaMasjid::where('id_berita_masjid', $id)->first();
+
+        $berita->is_published = 1;
+        $berita->save();
+
+        return redirect()->back()->with('success', 'Data Successfully Published!');
+    }
+
     public function delete($id)
     {
         $berita = BeritaMasjid::where('id_berita_masjid', $id)->first();
@@ -101,6 +115,6 @@ class BeritaMasjidController extends Controller
         $berita->delete();
 
         // REDIRECT TO PREVIOUS PAGE
-        return redirect()->to('admin/news')->with('success', 'Data Successfully Deleted!');
+        return redirect()->back()->with('success', 'Data Successfully Deleted!');
     }
 }

@@ -12,7 +12,10 @@ class AgendaController extends Controller
 {
     public function index()
     {
-        return view('agenda');
+        $data = Agenda::where('status_agenda', 1)->get();
+        return view('agenda', [
+            'data' => $data
+        ]);
     }
     public function admin()
     {

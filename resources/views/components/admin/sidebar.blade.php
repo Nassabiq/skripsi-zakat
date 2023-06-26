@@ -9,7 +9,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -23,16 +23,26 @@
         </a>
         <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item {{ request()->routeIs('admin_agenda') ? 'bg-gray-300 rounded' : '' }}"
-                    href="agenda">Agenda</a>
-                <a class="collapse-item {{ request()->routeIs('admin_galeri') ? 'bg-gray-300 rounded' : '' }}"
-                    href="gallery">Gallery</a>
-                <a class="collapse-item {{ request()->routeIs('admin_news') ? 'bg-gray-300 rounded' : '' }}"
-                    href="news">News</a>
-                <a class="collapse-item {{ request()->routeIs('laporan_zis') ? 'bg-gray-300 rounded' : '' }}"
-                    href="{{ route('laporan_zis') }}">Laporan ZIS</a>
-                <a class="collapse-item {{ request()->routeIs('kelola_user') ? 'bg-gray-300 rounded' : '' }}"
-                    href="{{ route('kelola_user') }}">Kelola User</a>
+                @hasanyrole('takmir|admin|ketua')
+                    <a class="collapse-item {{ request()->routeIs('admin_agenda') ? 'bg-gray-300 rounded' : '' }}"
+                        href="{{ route('admin_agenda') }}">Agenda</a>
+                    <a class="collapse-item {{ request()->routeIs('admin_news') ? 'bg-gray-300 rounded' : '' }}"
+                        href="{{ route('admin_news') }}">News</a>
+                @endhasanyrole
+                {{-- @hasanyrole('takmir|admin|ketua')
+                @endhasanyrole --}}
+                @hasanyrole('takmir|admin')
+                    <a class="collapse-item {{ request()->routeIs('admin_galeri') ? 'bg-gray-300 rounded' : '' }}"
+                        href="{{ route('admin_galeri') }}">Gallery</a>
+                @endhasanyrole
+                @hasanyrole('bendahara|admin|ketua')
+                    <a class="collapse-item {{ request()->routeIs('laporan_zis') ? 'bg-gray-300 rounded' : '' }}"
+                        href="{{ route('laporan_zis') }}">Laporan ZIS</a>
+                @endhasanyrole
+                @hasrole('admin')
+                    <a class="collapse-item {{ request()->routeIs('kelola_user') ? 'bg-gray-300 rounded' : '' }}"
+                        href="{{ route('kelola_user') }}">Kelola User</a>
+                @endhasrole
             </div>
         </div>
     </li>

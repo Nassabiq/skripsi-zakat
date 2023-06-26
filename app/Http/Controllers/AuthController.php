@@ -54,11 +54,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
-
-            if (Auth::user()->role('Muzakki')) {
+            if (Auth::user()->hasRole('muzakki')) {
                 return redirect()->intended('/')->with('success', 'You have logged in!');
             }
-            return redirect()->intended('admin/gallery')->with('success', 'You have logged in!');
+            return redirect()->intended(route('dashboard'))->with('success', 'You have logged in!');
         }
 
         return back()->withErrors([
@@ -121,7 +120,7 @@ class AuthController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->assignRole($request->role);
+        $user->syncRoles($request->role);
 
         $user->save();
 

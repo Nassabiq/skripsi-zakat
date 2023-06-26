@@ -51,13 +51,15 @@
                                             <i class="bi bi-file-earmark-pdf-fill"></i>
                                         </a>
                                     @endif
-                                    @if ($item->validasi_data == 0)
-                                        <button class="btn btn-sm btn-primary d-flex items-center" data-bs-toggle="modal"
-                                            data-bs-target="#validasi-{{ $item->id_zis }}">
-                                            <i class="bi bi-check2-circle mr-2"></i>
-                                            <span>Validasi</span>
-                                        </button>
-                                    @endif
+                                    @hasanyrole('admin|bendahara')
+                                        @if ($item->validasi_data == 0)
+                                            <button class="btn btn-sm btn-primary d-flex items-center" data-bs-toggle="modal"
+                                                data-bs-target="#validasi-{{ $item->id_zis }}">
+                                                <i class="bi bi-check2-circle mr-2"></i>
+                                                <span>Validasi</span>
+                                            </button>
+                                        @endif
+                                    @endhasanyrole
                                 </div>
                             </td>
                         </tr>

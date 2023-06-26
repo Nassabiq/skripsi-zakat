@@ -32,24 +32,23 @@ Route::middleware('auth')->group(function () {
 
     /** ----------------- ZIS MODULE --------------------- **/
 
-    Route::group(['middleware' => ['role:admin|muzakki']], function () {
-        Route::get('/zis', [ZisController::class, 'index'])->name('zis');
+    Route::get('/zis', [ZisController::class, 'index'])->name('zis');
 
-        Route::post('/zis', [ZisController::class, 'insert'])->name('addZis');
-        Route::patch('/zis/{id}', [ZisController::class, 'uploadPembayaran'])->name('uploadPembayaran');
+    Route::post('/zis', [ZisController::class, 'insert'])->name('addZis');
+    Route::patch('/zis/{id}', [ZisController::class, 'uploadPembayaran'])->name('uploadPembayaran');
 
-        Route::get('/data-muzakki', [ZisController::class, 'dashboard'])->name('data_muzakki');
+    Route::get('/data-muzakki', [ZisController::class, 'dashboard'])->name('data_muzakki');
 
-        Route::get('/zakat-fitrah', [ZisController::class, 'zakatFitrah']);
-        Route::get('/zakat-mal', [ZisController::class, 'zakatMal']);
-        Route::get('/infaq-sodaqoh', [ZisController::class, 'infaqSodaqoh']);
+    Route::get('/zakat-fitrah', [ZisController::class, 'zakatFitrah']);
+    Route::get('/zakat-mal', [ZisController::class, 'zakatMal']);
+    Route::get('/infaq-sodaqoh', [ZisController::class, 'infaqSodaqoh']);
 
-        Route::get('/invoice/{id}', [ZisController::class, 'invoice'])->name('invoice');
-    });
-
+    Route::get('/invoice/{id}', [ZisController::class, 'invoice'])->name('invoice');
 
     // ADMIN DASHBOARD
     Route::prefix('admin')->group(function () {
+
+        Route::get('', fn () => view('admin.home'))->name('dashboard');
 
         /** ----------------- AGENDA MODULE --------------------- **/
 
@@ -58,7 +57,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/agenda', [AgendaController::class, 'insert']); // INSERT DATA AGENDA
             Route::post('/agenda/storeImage', [AgendaController::class, 'storeImage'])->name('storeAgenda'); // IMAGE STORING CKEDITOR
             Route::patch('/agenda/{id_agenda}', [AgendaController::class, 'update'])->name('updateAgenda'); // UPDATE DATA AGENDA
-            Route::patch('/agenda/validasi/{id_agenda}', [AgendaController::class, 'validasi'])->name('validasiAgenda'); // UPDATE STATUS DATA AGENDA
+            Route::patch('/agenda/validasi/{id_agenda}', [AgendaController::class, 'validasi'])->name('validasiAgenda'); // VALIDASI DATA AGENDA
             Route::delete('/agenda/{id_agenda}', [AgendaController::class, 'delete'])->name('deleteAgenda'); // DELETE DATA AGENDA
         });
 
@@ -77,6 +76,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/news', [BeritaMasjidController::class, 'admin'])->name('admin_news'); // GET DATA BERITA MASJID
             Route::post('/news', [BeritaMasjidController::class, 'insert'])->name('addBerita'); // INSERT DATA BERITA
             Route::patch('/news/{id}', [BeritaMasjidController::class, 'update'])->name('updateBerita'); // UPDATE DATA BERITA
+            Route::patch('/news/publish/{id}', [BeritaMasjidController::class, 'publish'])->name('publishBerita'); // UPDATE DATA BERITA
             Route::delete('/news/{id}', [BeritaMasjidController::class, 'delete'])->name('deleteBerita'); // DELETE DATA BERITA
         });
 

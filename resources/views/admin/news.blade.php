@@ -8,9 +8,11 @@
         <div class="d-flex justify-content-between">
             <h1 class="h3 mb-4 text-gray-800">News</h1>
             <div>
-                <button class="btn btn-primary fs-6" type="button" data-bs-toggle="modal" data-bs-target="#modalAddBerita">
-                    Tambah Berita
-                </button>
+                @hasanyrole('takmir|admin')
+                    <button class="btn btn-primary fs-6" type="button" data-bs-toggle="modal" data-bs-target="#modalAddBerita">
+                        Tambah Berita
+                    </button>
+                @endhasanyrole
             </div>
         </div>
 
@@ -19,8 +21,8 @@
                 <thead>
                     <tr>
                         <th scope="col">-</th>
-                        <th scope="col">Id Agenda</th>
-                        <th scope="col">Nama Agenda</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Judul Berita</th>
                         <th scope="col">Date</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
@@ -47,6 +49,14 @@
                             </td>
                             <td>
                                 <div class="d-flex">
+                                    @hasanyrole('ketua|admin')
+                                        @if ($item->is_published == 0)
+                                            <button class="btn btn-secondary mr-2" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#modalPublishBerita-{{ $item->id_berita_masjid }}">
+                                                <i class="bi bi-file-arrow-up"></i>
+                                            </button>
+                                        @endif
+                                    @endhasanyrole
                                     <button class="btn btn-success mr-2" type="button" data-bs-toggle="modal"
                                         data-bs-target="#modalDetailBerita-{{ $item->id_berita_masjid }}">
                                         <i class="bi bi-eye"></i>
@@ -69,7 +79,7 @@
                             <div class="modal-dialog modal-dialog-centered modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Data Galeri </h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Data Berita</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -145,10 +155,38 @@
                         </div>
                         {{-- End Modal Delete Berita --}}
 
+                        {{-- Modal Publish Berita --}}
+                        <div class="modal fade" id="modalPublishBerita-{{ $item->id_berita_masjid }}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Publish Berita </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Apakah anda ingin mempublish data berita ini?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <form action="{{ route('publishBerita', $item->id_berita_masjid) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-primary">Publish</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- End Modal Publish Berita --}}
+
                         {{-- Modal Edit Berita --}}
                         <div id="modalEditBerita-{{ $item->id_berita_masjid }}" class="modal fade" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Galeri</h1>
@@ -175,7 +213,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">Deskripsi</label>
-                                                        <textarea id="editorBerita2" name="deskripsi_berita">
+                                                        <textarea id="editorBerita2" class="deskripsi_berita" name="deskripsi_berita">
                                                             {{ old('deskripsi_berita', $item->deskripsi_berita) }}
                                                         </textarea>
                                                         @error('deskripsi_berita')
@@ -217,7 +255,7 @@
         {{-- Modal Add Berita --}}
         <div id="modalAddBerita" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Berita</h1>
@@ -270,17 +308,20 @@
         </div>
         {{-- End Modal Add Berita --}}
         <script>
+            $(".deskripsi_berita").each(function() {
+                ClassicEditor
+                    .create({
+                        ckfinder: {
+                            uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            })
+
             ClassicEditor
                 .create(document.querySelector('#editorBerita'), {
-                    ckfinder: {
-                        uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-            ClassicEditor
-                .create(document.querySelector('#editorBerita2'), {
                     ckfinder: {
                         uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
                     }

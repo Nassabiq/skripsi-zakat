@@ -8,9 +8,11 @@
         <div class="d-flex justify-content-between mb-4">
             <h1 class="h3 mb-4 text-gray-800">Agenda</h1>
             <div>
-                <button class="btn btn-primary fs-6" type="button" data-bs-toggle="modal" data-bs-target="#modalAddAgenda">
-                    Tambah Agenda
-                </button>
+                @hasanyrole('takmir|admin')
+                    <button class="btn btn-primary fs-6" type="button" data-bs-toggle="modal" data-bs-target="#modalAddAgenda">
+                        Tambah Agenda
+                    </button>
+                @endhasanyrole
             </div>
         </div>
         <div class="col-12">
@@ -47,12 +49,14 @@
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        @if ($item->status_agenda == 0)
-                                            <button class="btn btn-success mr-2" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modalValidasiAgenda-{{ $item->id_agenda }}">
-                                                <i class="bi bi-check-square"></i>
-                                            </button>
-                                        @endif
+                                        @hasanyrole('admin|ketua')
+                                            @if ($item->status_agenda == 0)
+                                                <button class="btn btn-success mr-2" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#modalValidasiAgenda-{{ $item->id_agenda }}">
+                                                    <i class="bi bi-check-square"></i>
+                                                </button>
+                                            @endif
+                                        @endhasanyrole
                                         <button class="btn btn-primary mr-2" type="button" data-bs-toggle="modal"
                                             data-bs-target="#modalEditAgenda-{{ $item->id_agenda }}">
                                             <i class="bi bi-pencil-square"></i>

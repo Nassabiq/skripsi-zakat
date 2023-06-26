@@ -27,7 +27,7 @@
                                 style="font-size: 25px; position: absolute; margin-top: -10px"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            @hasanyrole('Ketua|Bendahara|Admin|Takmir')
+                            @hasanyrole('ketua|bendahara|admin|takmir')
                                 <li>
                                     <a class="dropdown-item" href="admin/agenda">Admin Page</a>
                                 </li>
