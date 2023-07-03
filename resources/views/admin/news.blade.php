@@ -213,7 +213,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">Deskripsi</label>
-                                                        <textarea id="editorBerita2" class="deskripsi_berita" name="deskripsi_berita">
+                                                        <textarea class="form-control" rows="5" class="deskripsi_berita" name="deskripsi_berita">
                                                             {{ old('deskripsi_berita', $item->deskripsi_berita) }}
                                                         </textarea>
                                                         @error('deskripsi_berita')
@@ -277,7 +277,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Deskripsi Berita</label>
-                                        <textarea id="editorBerita" name="deskripsi_berita"></textarea>
+                                        <textarea class="form-control" rows="5" name="deskripsi_berita"></textarea>
                                         @error('deskripsi_berita')
                                             <div class="text-danger error-messages">{{ $message }}</div>
                                         @enderror
@@ -307,29 +307,6 @@
             </div>
         </div>
         {{-- End Modal Add Berita --}}
-        <script>
-            $(".deskripsi_berita").each(function() {
-                ClassicEditor
-                    .create({
-                        ckfinder: {
-                            uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            })
-
-            ClassicEditor
-                .create(document.querySelector('#editorBerita'), {
-                    ckfinder: {
-                        uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        </script>
     </div>
     <!-- /.container-fluid -->
 @endsection

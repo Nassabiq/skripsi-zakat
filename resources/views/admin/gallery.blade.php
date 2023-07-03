@@ -166,7 +166,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">Deskripsi Galeri</label>
-                                                        <textarea id="editorGaleri2" name="deskripsi_galeri">
+                                                        <textarea class="form-control" rows="5" name="deskripsi_galeri">
                                                             {{ old('deskripsi_galeri', $item->deskripsi_galeri) }}
                                                         </textarea>
                                                         @error('deskripsi_galeri')
@@ -229,7 +229,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Deskripsi Galeri</label>
-                                        <textarea id="editorGaleri" name="deskripsi_galeri"></textarea>
+                                        <textarea class="form-control" rows="5" name="deskripsi_galeri"></textarea>
                                         @error('deskripsi_galeri')
                                             <div class="text-danger error-messages">{{ $message }}</div>
                                         @enderror
@@ -259,26 +259,6 @@
             </div>
         </div>
         {{-- End Modal Add Galeri --}}
-        <script>
-            ClassicEditor
-                .create(document.querySelector('#editorGaleri'), {
-                    ckfinder: {
-                        uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-            ClassicEditor
-                .create(document.querySelector('#editorGaleri2'), {
-                    ckfinder: {
-                        uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        </script>
     </div>
     <!-- /.container-fluid -->
 @endsection

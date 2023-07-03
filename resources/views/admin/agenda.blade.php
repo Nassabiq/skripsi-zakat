@@ -163,7 +163,7 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label">Deskripsi Agenda</label>
-                                                            <textarea id="editorAgenda2" name="deskripsi_agenda">
+                                                            <textarea class="form-control" rows="5" name="deskripsi_agenda">
                                                                 {{ old('deskripsi_agenda', $item->deskripsi_agenda) }}
                                                             </textarea>
                                                             @error('deskripsi_agenda')
@@ -202,15 +202,6 @@
                     </tbody>
                 </table>
             </div>
-
-            {{-- <div class="d-flex my-4 justify-content-between">
-                <button class="btn btn-primary mr-2 btn-prev" type="button">
-                    Prev
-                </button>
-                <button class="btn btn-primary btn-next" type="button">
-                    Next
-                </button>
-            </div> --}}
         </div>
 
         {{-- Modal Add Agenda --}}
@@ -246,7 +237,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Deskripsi Agenda</label>
-                                        <textarea id="editorAgenda" name="deskripsi_agenda"></textarea>
+                                        <textarea class="form-control" rows="5" name="deskripsi_agenda"></textarea>
                                         @error('deskripsi_agenda')
                                             <div class="text-danger error-messages">{{ $message }}</div>
                                         @enderror
@@ -276,26 +267,5 @@
             </div>
         </div>
         {{-- End Modal Add Agenda --}}
-
-        <script>
-            ClassicEditor
-                .create(document.querySelector('#editorAgenda'), {
-                    ckfinder: {
-                        uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-            ClassicEditor
-                .create(document.querySelector('#editorAgenda2'), {
-                    ckfinder: {
-                        uploadUrl: "{{ route('storeAgenda') . '?_token=' . csrf_token() }}",
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        </script>
     </div>
 @endsection
